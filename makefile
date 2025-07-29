@@ -1,13 +1,23 @@
-cxx 		?= g++
-cxxflags 	?=
-destdir     ?=
-prefix	    ?= /usr/bin
+CXX        ?= g++
+CXXFLAGS   ?= -O3 -flto -Wall -Wextra -Wpedantic -std=c++20 -s
+DESTDIR    ?=
+PREFIX     ?= /usr/bin
 
-make:
-	$(cxx) main.cc $(cxxflags) -o sppkg
+all: sppkg
 
-testpkg:
-	\./sppkg test
+sppkg:
+	$(CXX) main.cc lib/pkg.cc lib/tar.cc lib/gbl.cc $(CXXFLAGS) -o sppkg -larchive
+
+testpkg: sppkg
+	./sppkg test
 
 install:
-	cp sppkg $(destdir)$(prefix)/sppkg
+	mkdir -p /sppkg/build
+	mkdir -p /sppkg/temp
+	mkdir -p /sppkg/var
+	mkdir -p /sppkg/tars
+	cp ./config/global /sppkg/var/global
+	install -Dm755 sppkg $(DESTDIR)$(PREFIX)/sppkg
+
+clean:
+	rm -f sppkg

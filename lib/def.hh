@@ -5,12 +5,13 @@
 #include <vector>
 
 namespace sppkg {
-    const inline std::string root = "/sppkg/";
-    const inline std::string buildroot = "/sppkg/build/";
-    const inline std::string temproot = "/sppkg/temp/";
-    const inline std::string tarroot = "/sppkg/tars/";
-    const inline std::string globalfile = "/sppkg/var/global";
-    const inline std::string pkgroot = "/sppkg/pkgs/";
+    const std::string root = "/sppkg/";
+    const std::string buildroot = "/sppkg/build/";
+    const std::string temproot = "/sppkg/temp/";
+    const std::string tarroot = "/sppkg/tars/";
+    const std::string globalfile = "/sppkg/var/global";
+    const std::string pkgroot = "/sppkg/pkgs/";
+    const float version = 0.1;
 }
 
 /*
