@@ -1,0 +1,4 @@
+destdir = "/temp/build"
+repos {
+    "sppkg-base-repo" = "https://github.com/SPdoesCode/sppkg-base-repo.git"
+}

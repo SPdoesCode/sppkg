@@ -1,3 +1,1 @@
-Global = [
-    { name = "sppkg", version = "0.1"}
-]
+sppkg:"1.0":"sppkg":"sppkg"
