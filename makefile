@@ -1,27 +1,19 @@
-CC      ?= cc
-CFLAGS  ?= -std=c17 -Wall -Wextra -Wpedantic -Wshadow -Wpointer-arith \
-           -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes \
-           -Werror -O2 -pipe -fstack-protector-strong \
-           -D_FORTIFY_SOURCE=2 -fPIE -static
-DCFLAGS ?= -std=c17 -Wall -Wextra -Wpedantic -g3 -O0 -static
+ZIG       	?= zig
+ZIGFLAGS  	?= -OReleaseSafe
 
-DESTDIR ?=
-PREFIX  ?= /usr/bin
-TARGET  = sppkg
-SRC     = $(wildcard src/*.c)
+SRC       	:= src/main.zig
+TARGET    	:= sppkg
 
-.PHONY: all debug clean install
+DESTDIR		?=
+PREFIX		?= /usr/bin
 
 all: $(TARGET)
 
-$(TARGET):
-	$(CC) $(CFLAGS) $(SRC) -o $@
-
-debug:
-	$(CC) $(DCFLAGS) $(SRC) -o $(TARGET)
-
-install: $(TARGET)
-	install -Dm755 $(TARGET) $(DESTDIR)$(PREFIX)/$(TARGET)
+$(TARGET): $(SRC)
+	$(ZIG) build-exe $(ZIGFLAGS) -femit-bin=$(TARGET) $(SRC)
 
 clean:
 	rm -f $(TARGET)
+
+install: $(TARGET)
+	install -Dm755 $(TARGET) $(DESTDIR)$(PREFIX)/$(TARGET)
